@@ -14,13 +14,13 @@ int opcaoMenu;
     {
      do
      {
-      printf("-----Super Trunfo Cidades-----\n");
+      printf("\n-----Super Trunfo Cidades-----\n");
       printf("Informe a opcao desejada:\n");
       printf("1 - Cadastrar\n");
       printf("2 - Exibir:\n");
       printf("3 - Jogar\n");
       printf("4 - Sair\n");
-      scanf("%d,&opcaomenu");
+      scanf("%d",&opcaoMenu);
       switch (opcaoMenu)
       {
        case 1:
@@ -37,7 +37,7 @@ int opcaoMenu;
           //Encerra o menu e o programa
           break;  
         default:
-        printf("Informe uma opcao valida");
+        printf("Informe uma opcao valida\n");
           break;
       };
      } while (opcaoMenu!=4);
@@ -63,5 +63,6 @@ int main() {
     char nomeEstado[15];
     cidade cidades[4];
   } estado;
+  menuPrincipal();
 return 0;
 } 
