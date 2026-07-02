@@ -31,13 +31,11 @@ int opcaoMenu;
 // Procedimento para entrada de carta
    void cadastroCartas()
     {
-     char letra = 'A';
      for (int i = 0; i <= 7; i++)
      {
-      estados[i].codEstado = letra;
+      estados[i].codEstado = 'A'+1;
       printf("Informe o nome do Estado %c: ", estados[i].codEstado);
       fgets(estados[i].nomeEstado, 30, stdin);
-      letra++;
      }
     }
 // Procedimento para exibição dos dados da cidade
