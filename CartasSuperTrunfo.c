@@ -2,6 +2,7 @@
 // Desafio Super Trunfo - Países
 // Variaveis globais
 int opcaoMenu;
+int submenuCadastro;
 // Procedimentos
 // Área para definição das variáveis para armazenar as propriedades das cidades
     // Definicao das variaveis do tipo struct
@@ -28,12 +29,12 @@ int opcaoMenu;
   // Definicao do vetor de estados do tipo estado (Struct)
   estado estados[8];
 
-// Procedimento para entrada de carta
-   void cadastroCartas()
+// Procedimento para cadstro do estado
+   void cadastroEstado()
     {
      for (int i = 0; i <= 7; i++)
      {
-      estados[i].codEstado = 'A'+1;
+      estados[i].codEstado = 'A' + i;
       printf("Informe o nome do Estado %c: ", estados[i].codEstado);
       fgets(estados[i].nomeEstado, 30, stdin);
      }
@@ -45,6 +46,7 @@ int opcaoMenu;
 // Procedimento para exibir menu e ler opcao
    void menuPrincipal() 
     {
+     char entradaMenu[4]; 
      do
      {
       printf("\n-----Super Trunfo Cidades-----\n\n");
@@ -53,26 +55,63 @@ int opcaoMenu;
       printf("2 - Exibir:\n");
       printf("3 - Jogar\n");
       printf("4 - Sair\n");
-      scanf("%d",&opcaoMenu);
+      fgets(entradaMenu, sizeof(entradaMenu), stdin); //armazenamento da opção do menu
+      opcaoMenu = atoi(entradaMenu); //opcao do menu recebe a conversão da opção 
       switch (opcaoMenu)
       {
        case 1:
+       {
           //Procedimento para cadastrar as cartas
-          cadastroCartas();
+           char entradaSubmenu[4]; 
+          do
+          {
+            //Submenu de cadastro
+            printf("Informe a opcao desejada:\n\n");
+            printf("1 - Cadastrar Estado\n");
+            printf("2 - Cadastrar Cidade:\n");
+            printf("3 - Voltar\n");
+            fgets(entradaSubmenu, sizeof(entradaSubmenu), stdin); //armazenamento da opção do menu
+            submenuCadastro = atoi(entradaSubmenu); //opcao do menu recebe a conversão da opção 
+            switch (submenuCadastro)
+            {
+            case 1:
+
+                cadastroEstado(); //cadastro de estado
+               break;
+            case 2:
+                //cadastro de cidade
+               break;
+            case 3:
+               break;
+               //retorna ao menu anterior
+            default:
+            printf("Informe uma opcao valida\n");
+               break;
+            }
+          } while (submenuCadastro!=3);
           break;
-       case 2:
+      }
+      case 2:
+       {
           //Procedimento para exibir as cartas
           break;
+       }
        case 3:
+       {
           //Procedimento para exibir as cartas
           //Procedimento para comparar as cartas
-          break;  
+          break; 
+       } 
        case 4:
+       {
           //Encerra o menu e o programa
-          break;  
+          break;
+       }
         default:
+       {
         printf("Informe uma opcao valida\n");
           break;
+       }
       };
      } while (opcaoMenu!=4);
    }
