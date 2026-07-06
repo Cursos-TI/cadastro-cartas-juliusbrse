@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 // Desafio Super Trunfo - Países
 // Variaveis globais
 int opcaoMenu;
 int submenuCadastro;
+int submenuExibicao;
 // Procedimentos
 // Área para definição das variáveis para armazenar as propriedades das cidades
     // Definicao das variaveis do tipo struct
@@ -39,6 +41,18 @@ int submenuCadastro;
       fgets(estados[i].nomeEstado, 30, stdin);
      }
     }
+// Procedimento para exibição de estado
+   void exibirEstado()
+    {
+     printf("Estados Cadastrados:\n\n");
+     for (int i = 0; i <= 7; i++)
+     {
+      printf("Estado %c: ", estados[i].codEstado);
+     }
+    }
+
+// Procedimento para cadastro da cidade
+
 // Procedimento para exibição dos dados da cidade
 
 // Procedimento para comparacao de cidades
@@ -62,7 +76,7 @@ int submenuCadastro;
        case 1:
        {
           //Procedimento para cadastrar as cartas
-           char entradaSubmenu[4]; 
+          char eSubmenuCadastro[4]; 
           do
           {
             //Submenu de cadastro
@@ -70,8 +84,8 @@ int submenuCadastro;
             printf("1 - Cadastrar Estado\n");
             printf("2 - Cadastrar Cidade:\n");
             printf("3 - Voltar\n");
-            fgets(entradaSubmenu, sizeof(entradaSubmenu), stdin); //armazenamento da opção do menu
-            submenuCadastro = atoi(entradaSubmenu); //opcao do menu recebe a conversão da opção 
+            fgets(eSubmenuCadastro, sizeof(eSubmenuCadastro), stdin); //armazenamento da opção do menu
+            submenuCadastro = atoi(eSubmenuCadastro); //opcao do menu recebe a conversão da opção 
             switch (submenuCadastro)
             {
             case 1:
@@ -94,6 +108,33 @@ int submenuCadastro;
       case 2:
        {
           //Procedimento para exibir as cartas
+          //Submenu de exibição
+            char eSubmenuExibicao[4]; 
+          do
+          {
+            //Submenu de exibição
+            printf("Informe a opcao desejada:\n\n");
+            printf("1 - Exibir Estados\n");
+            printf("2 - Exibir Cidades:\n");
+            printf("3 - Voltar\n");
+            fgets(eSubmenuExibicao, sizeof(eSubmenuExibicao), stdin); //armazenamento da opção do menu
+            submenuExibicao = atoi(eSubmenuExibicao); //opcao do menu recebe a conversão da opção 
+            switch (submenuExibicao)
+            {
+            case 1:
+                exibirEstado(); //exibição de estados
+               break;
+            case 2:
+                //exibição de cidades
+               break;
+            case 3:
+               break;
+               //retorna ao menu anterior
+            default:
+            printf("Informe uma opcao valida\n");
+               break;
+            }
+          } while (submenuExibicao!=3);
           break;
        }
        case 3:
