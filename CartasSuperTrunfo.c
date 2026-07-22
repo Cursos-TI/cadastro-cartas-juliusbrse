@@ -4,7 +4,6 @@
 // Variaveis globais
 int opcaoMenu;
 int submenuCadastro;
-int submenuExibicao;
 // Procedimentos
 // Área para definição das variáveis para armazenar as propriedades das cidades
     // Definicao das variaveis do tipo struct
@@ -20,7 +19,6 @@ int submenuExibicao;
       } cidade;
 
     //Struct do estado
-    
      typedef struct 
       {
        char codEstado; 
@@ -28,11 +26,12 @@ int submenuExibicao;
        cidade cidades[4];
       } estado;
 
-  // Definicao do vetor de estados do tipo estado (Struct)
+  // Definicao dos vetores de estados e cidades do tipo estado (Struct)
   estado estados[8];
+  cidade cidades[4];
 
-// Procedimento para cadstro do estado
-   void cadastroEstado()
+// Procedimento para cadastro do estado
+   void cadastroEstados()
     {
      for (int i = 0; i <= 7; i++)
      {
@@ -41,13 +40,37 @@ int submenuExibicao;
       fgets(estados[i].nomeEstado, 30, stdin);
      }
     }
-// Procedimento para exibição de estado
-   void exibirEstado()
+// Procedimento para cadastro das cidades
+   void cadastroCidades()
     {
-     printf("Estados Cadastrados:\n\n");
+     char codEstado;
+     int codSelec;
+     printf("\n Informe o código do estado no qual deseja cadastrar as cidades\n");
+     scanf(" %c",&codEstado );
+     while (getchar() != '\n');
+     codSelec = codEstado - 'A';
+     for (int i = 0; i <= 3; i++)
+      {
+       estados[codSelec].cidades[i].codCidade = i + 1;
+       printf("\nInforme o nome da Cidade %d para o estado %s\n", estados[codSelec].cidades[i].codCidade, estados[codSelec].nomeEstado);
+       fgets(estados[codSelec].cidades[i].nomeCidade, 30, stdin);
+       printf("\nInforme a população da Cidade %d para o estado %s\n",estados[codSelec].cidades[i].codCidade, estados[codSelec].nomeEstado);
+       scanf("%d", &estados[codSelec].cidades[i].populacao);
+       while (getchar() != '\n');
+      }
+     }
+// Procedimento para exibição de cartas
+   void exibirCartas()
+    {
+     printf("Cartas Cadastradas:\n\n");
      for (int i = 0; i <= 7; i++)
      {
-      printf("Estado %c: ", estados[i].codEstado);
+      printf("\nCodigo do estado: %c - Nome do estado: %s\n", estados[i].codEstado, estados[i].nomeEstado);
+      for (int j = 0; j<= 3; j++)
+      {
+         printf("\nCodigo da cidade: %d - Nome da cidade: %s\n", estados[i].cidades[j].codCidade, estados[i].cidades[j].nomeCidade);
+         printf("População da cidade: %s\n\n", estados[i].cidades[j].populacao);
+      }
      }
     }
 
@@ -64,13 +87,13 @@ int submenuExibicao;
      do
      {
       printf("\n-----Super Trunfo Cidades-----\n\n");
-      printf("Informe a opcao desejada:\n\n");
+      printf("\nInforme a opcao desejada:\n\n");
       printf("1 - Cadastrar\n");
       printf("2 - Exibir:\n");
       printf("3 - Jogar\n");
       printf("4 - Sair\n");
-      fgets(entradaMenu, sizeof(entradaMenu), stdin); //armazenamento da opção do menu
-      opcaoMenu = atoi(entradaMenu); //opcao do menu recebe a conversão da opção 
+      fgets(entradaMenu, 4, stdin); //armazenamento da opção do menu
+      opcaoMenu = atoi(entradaMenu); //converte a entrada para int, e a atribui ao menu 
       switch (opcaoMenu)
       {
        case 1:
@@ -80,7 +103,7 @@ int submenuExibicao;
           do
           {
             //Submenu de cadastro
-            printf("Informe a opcao desejada:\n\n");
+            printf("\nInforme a opcao desejada:\n\n");
             printf("1 - Cadastrar Estado\n");
             printf("2 - Cadastrar Cidade:\n");
             printf("3 - Voltar\n");
@@ -89,17 +112,20 @@ int submenuExibicao;
             switch (submenuCadastro)
             {
             case 1:
-
-                cadastroEstado(); //cadastro de estado
+                //cadastro de estado
+                cadastroEstados();
                break;
             case 2:
+                // exibição das cartas
+                exibirCartas();
                 //cadastro de cidade
+                cadastroCidades();
                break;
             case 3:
                break;
                //retorna ao menu anterior
             default:
-            printf("Informe uma opcao valida\n");
+            printf("\nInforme uma opcao valida\n");
                break;
             }
           } while (submenuCadastro!=3);
@@ -107,35 +133,8 @@ int submenuExibicao;
       }
       case 2:
        {
-          //Procedimento para exibir as cartas
-          //Submenu de exibição
-            char eSubmenuExibicao[4]; 
-          do
-          {
-            //Submenu de exibição
-            printf("Informe a opcao desejada:\n\n");
-            printf("1 - Exibir Estados\n");
-            printf("2 - Exibir Cidades:\n");
-            printf("3 - Voltar\n");
-            fgets(eSubmenuExibicao, sizeof(eSubmenuExibicao), stdin); //armazenamento da opção do menu
-            submenuExibicao = atoi(eSubmenuExibicao); //opcao do menu recebe a conversão da opção 
-            switch (submenuExibicao)
-            {
-            case 1:
-                exibirEstado(); //exibição de estados
-               break;
-            case 2:
-                //exibição de cidades
-               break;
-            case 3:
-               break;
-               //retorna ao menu anterior
-            default:
-            printf("Informe uma opcao valida\n");
-               break;
-            }
-          } while (submenuExibicao!=3);
-          break;
+         //Procedimento para exibir as cartas
+         exibirCartas(); 
        }
        case 3:
        {
